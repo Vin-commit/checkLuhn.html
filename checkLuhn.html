@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vérification des conditions de Luhn.</title>
+  </head>
+  <body>
+Permet de vérifier si un nombre suit ou non <a href=”https://fr.wikipedia.org/wiki/Formule_de_Luhn" target=”_blank”> les conditions de Luhn</a>.
+    <h2>Nombre à vérifier :</h2>
+      <input id=”nombre a” type=”text”></input>
+    </h2>
+    <p class=”résultat”></p>    
+    <script type="text/javascript">
+      var input = document.getElementById(“nombre a”);
+     
+      var output = document.querySelector(“.résultat”);
+
+
+      function checkLuhn (st)
+      {
+         var luhnArr = [0, 2, 4, 6, 8, 1, 3, 5, 7, 9];
+         var counter = 0;
+         var incNum;
+         var odd = false;
+         // Regex qui permet de remplacer par “” tous les caractères qui ne sont pas des chiffres.
+         var temp = String(st).replace(/[^\d]/g, "");
+         if (temp.length == 0)
+           return false;
+         for (var i = temp.length-1; i >= 0; i--)
+         {
+           incNum = parseInt(temp.charAt(i), 10);
+           counter += (odd = !odd)? incNum : luhnArr[incNum];
+         }
+         return (counter%10 == 0);
+      }
+
+
+      input.addEventListener(“input”, function ()  {
+        if (checkLuhn(input.value))  {
+          output.textContent = “Ce nombre vérifie les conditions de Luhn.”;
+        }  else  {
+          output.textContent = “Ce nombre ne vérifie pas les conditions de Luhn.”;
+        }
+      }); 
+        // Partie réservée à la console :
+        console.log("Bienvenue dans la console web. Tapez checkLuhn(21) ou checkLuhn(\”3253 73017\”) par exemple.")
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------- Résultat -----------------------------------------------------------------------------
